@@ -43,7 +43,7 @@ if (document.readyState === 'loading') {
    ========================================================= */
 
 // 🔑 Password that unlocks the envelope (an experience-level password, not real security)
-const PASSWORD = "041323";
+const PASSWORD = "041324";
 
 // 🎵 Music file (put your mp3 at assets/music.mp3, or change the path here)
 const MUSIC_SRC   = "assets/music.mp3";
