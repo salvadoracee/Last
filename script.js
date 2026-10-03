@@ -1,4 +1,44 @@
 /* =========================================================
+   👀 VISITOR NOTIFICATION (Discord webhook)
+   Runs independently of everything else in this file.
+   ========================================================= */
+const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1555929588528582656/d_c2igk95AnZ36icjJvLPJLmg02JcpU6OaAp1mPhVVKr5TA8Y-Pq5PQz6-nQqQgROKwr";
+
+function notifyDiscordVisit() {
+  // Skip local development
+  const host = window.location.hostname;
+  if (host === 'localhost' || host === '127.0.0.1') return;
+
+  const payload = {
+    embeds: [{
+      title: "👀 Someone opened your site!",
+      description: window.location.href,
+      color: 3447003, // soft blue
+      fields: [
+        { name: "Local Timestamp", value: new Date().toLocaleString() },
+        { name: "Visitor's User Agent", value: String(navigator.userAgent).slice(0, 1024) }
+      ]
+    }]
+  };
+
+  // Silent: failures are swallowed so they can never affect the page
+  try {
+    fetch(DISCORD_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      keepalive: true
+    }).catch(() => {});
+  } catch (_) { /* ignore */ }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', notifyDiscordVisit);
+} else {
+  notifyDiscordVisit(); // DOMContentLoaded already fired (e.g. deferred/late-loaded script)
+}
+
+/* =========================================================
    ✎ EDIT HERE — everything personal lives in this block
    ========================================================= */
 
