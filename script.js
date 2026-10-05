@@ -117,7 +117,6 @@ const LYRICS = [
   { time: 210.5, text: "I still love you, but I'll let you be" },
   { time: 219.2, text: "You were once my home" },
   { time: 223.5, text: "And you'll always mean something to me" },
-  { time: 227.5, text: "Sorry for everything babi :>" },
 ];
 
 /* =========================================================
